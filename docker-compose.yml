@@ -1,0 +1,39 @@
+services:
+  shopping-service:
+    build:
+      context: ./shopping-service
+      dockerfile: Dockerfile
+    container_name: shopping-service
+    volumes:
+      - ./shopping-service:/var/www/html
+    ports:
+      - "9002:9000"
+    depends_on:
+      - shopping-db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8003:80"
+    volumes:
+      - ./shopping-service:/var/www/html
+      - ./shopping-service/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - shopping-service
+
+  shopping-db:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shopping
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
