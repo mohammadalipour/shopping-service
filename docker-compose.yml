@@ -11,6 +11,7 @@ services:
       - ecommerce-network
     depends_on:
       - shopping-db
+    entrypoint: ["/bin/bash", "docker/start.sh"]
     command: ["php-fpm"]
 
   shopping-nginx:
