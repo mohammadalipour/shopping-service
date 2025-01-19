@@ -11,6 +11,8 @@ services:
       - ecommerce-network
     depends_on:
       - shopping-db
+    env_file:
+      - ./shopping-service/.env
     entrypoint: ["/bin/bash", "docker/start.sh"]
     command: ["php-fpm"]
 
