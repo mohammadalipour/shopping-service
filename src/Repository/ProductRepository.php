@@ -38,19 +38,4 @@ class ProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function enableProduct(int $productId, bool $enabled): Product
-    {
-        $entityManager = $this->getEntityManager();
-        $product = $this->findOneBy(['productId' => $productId]);
-
-        if (!$product) {
-            throw new \InvalidArgumentException('Product not found.');
-        }
-
-        $product->setEnabled($enabled);
-        $entityManager->persist($product);
-        $entityManager->flush();
-
-        return $product;
-    }
 }
