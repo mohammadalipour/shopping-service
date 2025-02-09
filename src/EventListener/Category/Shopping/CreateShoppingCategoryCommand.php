@@ -1,9 +1,9 @@
 <?php
 
-namespace App\EventListener\Product\Shopping;
+namespace App\EventListener\Category\Shopping;
 
 
-readonly class CreateShoppingProductCommand
+readonly class CreateShoppingCategoryCommand
 {
     public function __construct(private string $content)
     {
